@@ -3,6 +3,7 @@ import scipy.sparse as sp
 import torch
 import pickle
 import os
+import fickling
 
 
 def sp_coo_2_sp_tensor(sp_coo_mat):
@@ -77,7 +78,7 @@ def load_odbmag_4017(args, train_percent):
     file_name = path+'p_label_im_'+str(args.im_ratio)+'.pkl'
     if os.path.exists(file_name):
         with open(file_name, "rb+") as f:
-            label = pickle.load(f)
+            label = fickling.load(f)
     else:
         idx_train_p, idx_val_p, idx_test_p = train_val_test_split_imbalance(args, p_label.shape[0], train_percent, p_label, args.im_ratio)
         label = {}
@@ -114,14 +115,14 @@ def load_imdb_3228(args, train_percent):
     data_path = '../data/imdb/imdb3228.pkl'
 
     with open(data_path, 'rb') as in_file:
-        (label, ft_dict, adj_dict) = pickle.load(in_file)
+        (label, ft_dict, adj_dict) = fickling.load(in_file)
 
         m_label = label['m'][0]
         path='../data/imdb/'
         file_name = path+'m_label_im_'+str(args.im_ratio)+'.pkl'
         if os.path.exists(file_name):
             with open(file_name, "rb+") as f:
-                label = pickle.load(f)
+                label = fickling.load(f)
         else:
             idx_train_m, idx_val_m, idx_test_m = train_val_test_split_imbalance(args,m_label.shape[0], train_percent, m_label, args.im_ratio)
             label = {}
