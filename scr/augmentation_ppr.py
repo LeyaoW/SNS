@@ -1,9 +1,9 @@
-import random
 import os
 import torch
 import numpy as np
 from pprfile import *
 import scipy
+import secrets
 
 
 def calc_ppr(args,adj_dict):
@@ -213,5 +213,5 @@ def augmentation(args,  ppr, ft_dict_ori, adj_dict_ori, true_label, idx_train):
 
 
     all_pseudo_idx = np.array(all_pseudo_idx.cpu())
-    random.shuffle(all_pseudo_idx)
+    secrets.SystemRandom().shuffle(all_pseudo_idx)
     return ft_dict, adj_dict, true_label_aug, all_pseudo_idx

@@ -2,9 +2,9 @@ import torch
 import torch.nn as nn
 import numpy as np
 from sklearn.metrics import f1_score, balanced_accuracy_score
-import random
 import csv
 import os
+import secrets
 
 
 def score(logits, labels):
@@ -60,7 +60,7 @@ def set_random_seed(seed=1024):
         Random seed to use
     """
     os.environ['PYTHONHASHSEED'] = str(seed)
-    random.seed(seed)
+    secrets.SystemRandom().seed(seed)
     np.random.seed(seed)
     torch.manual_seed(seed)
     if torch.cuda.is_available():
